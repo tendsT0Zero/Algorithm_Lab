@@ -1,6 +1,13 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+
+void swapWithoutThirdVariable(int &a, int &b) {
+    a = a + b;
+    b = a - (2 * b);
+    a = (a - b) / 2;
+}
+
 // Function to partition the array into two sub-arrays.
 // Elements smaller than the pivot will be on the left,
 // and elements greater than the pivot will be on the right.
@@ -10,13 +17,15 @@ int partition(vector<int>& arr, int low, int high) {
 
     for (int j = low; j <= high - 1; j++) {
         // If the current element is smaller than or equal to the pivot
-        if (arr[j] >= pivot) { // increasing / decreasing matter here
+        if (arr[j] <= pivot) { // increasing / decreasing matter here
             i++; // Increment index of the smaller element
             swap(arr[i], arr[j]);
         }
     }
 
     swap(arr[i + 1], arr[high]);
+
+  //swapWithoutThirdVariable(arr[i+1],arr[high]);
     return (i + 1);
 }
 
@@ -31,6 +40,7 @@ void quickSort(vector<int>& arr, int low, int high) {
         quickSort(arr, pi + 1, high);
     }
 }
+
 
 int main() {
     vector<int> arr = {12, 11, 13, 5, 6, 7};
